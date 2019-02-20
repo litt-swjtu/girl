@@ -1,5 +1,7 @@
 package com.swjtu.girl.aspect;
 
+import com.swjtu.girl.Exception.GirlException;
+import com.swjtu.girl.enums.ResultEnum;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -30,12 +32,19 @@ public class HttpAspect {
     }
 
     @Before("log()")
-    public void doBefore(JoinPoint joinPoint) {
+    public void doBefore(JoinPoint joinPoint) throws Exception{
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
 
+        if(!("cbcdbhcd").equals(request.getHeader("Authentication"))) {
+            throw new GirlException(ResultEnum.UNLOGIN);
+        }
+
         //url
         logger.info("url={}", request.getRequestURL());
+
+        //header
+        logger.info("header={}",request.getHeader("Cookie"));
 
         //method
         logger.info("method={}", request.getMethod());
