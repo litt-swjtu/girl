@@ -36,15 +36,13 @@ public class HttpAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
 
-        if(!("cbcdbhcd").equals(request.getHeader("Authentication"))) {
+        if(!("login").equals(request.getHeader("Authorization"))) {
+            System.out.println(request.getHeader("Authorization"));
             throw new GirlException(ResultEnum.UNLOGIN);
         }
 
         //url
         logger.info("url={}", request.getRequestURL());
-
-        //header
-        logger.info("header={}",request.getHeader("Cookie"));
 
         //method
         logger.info("method={}", request.getMethod());

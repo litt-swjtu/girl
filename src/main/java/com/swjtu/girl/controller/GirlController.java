@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * @author 李天峒
  * @date 2019/1/20 18:37
  */
+@CrossOrigin
 @RestController
 @Slf4j
 public class GirlController {
@@ -33,7 +35,7 @@ public class GirlController {
      * @return List<girl>
      **/
     @GetMapping("/list")
-    public List<Girl> girlList() {
+    public List<Girl> girlList( ) {
         log.info("girlList");
         return girlreRepository.findAll();
     }
@@ -64,7 +66,6 @@ public class GirlController {
     public Girl girlFindOne(@RequestParam("id") Integer id) {
         return girlreRepository.findById(id).get();
     }
-
     /**
      * 更新女生信息
      *

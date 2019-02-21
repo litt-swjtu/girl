@@ -6,6 +6,8 @@ package com.swjtu.girl.enums;
  *
  */
 public enum ResultEnum {
+    /***/
+    UNLOGIN(500,"未登录系统"),
     /**未知错误*/
     UNKONW_ERROR (-1, "未知错误"),
     /** 成功*/
