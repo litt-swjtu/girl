@@ -42,7 +42,6 @@ public class GirlController {
 
     /**
      * 添加女生信息
-     *
      * @param girl
      * @return girl
      */
@@ -74,14 +73,14 @@ public class GirlController {
      * @param cupSize
      */
     @PutMapping("/update")
-    public void girlUpdate(@RequestParam("id") Integer id,
+    public Girl girlUpdate (@RequestParam("id") Integer id,
                            @RequestParam("age") Integer age,
-                           @RequestParam("cupSize") String cupSize) {
+                           @RequestParam("cupSize") String cupSize){
         Girl girl = new Girl();
         girl.setId(id);
         girl.setAge(age);
         girl.setCupSize(cupSize);
-        girlreRepository.save(girl);
+        return (girlreRepository.save(girl));
     }
 
     /**
