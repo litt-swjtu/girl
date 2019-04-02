@@ -1,5 +1,7 @@
 package com.swjtu.girl.dao;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,16 +13,17 @@ import javax.validation.constraints.NotNull;
  * @date 2019/1/20 18:27
  */
 @Entity
+@DynamicUpdate
 public class Girl {
 
     @Id
     @GeneratedValue
     private Integer id;
 
-    @NotNull(message = "cupSize必传")
+    //   @NotNull(message = "cupSize必传")
     private String cupSize;
 
-    @Min(value = 18,message = "未成年少女禁止入内")
+    @Min(value = 18, message = "未成年少女禁止入内")
     private Integer age;
 
     public Girl() {

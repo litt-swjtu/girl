@@ -2,7 +2,7 @@ package com.swjtu.girl.controller;
 
 import com.swjtu.girl.dao.Result;
 import com.swjtu.girl.service.GirlService;
-import com.swjtu.girl.repository.GirlreRepository;
+import com.swjtu.girl.repository.GirlRepository;
 import com.swjtu.girl.dao.Girl;
 import com.swjtu.girl.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -24,7 +23,7 @@ import java.util.List;
 public class GirlController {
 
     @Autowired
-    private GirlreRepository girlreRepository;
+    private GirlRepository girlRepository;
 
     @Autowired
     private GirlService girlService;
@@ -35,13 +34,14 @@ public class GirlController {
      * @return List<girl>
      **/
     @GetMapping("/list")
-    public List<Girl> girlList( ) {
+    public List<Girl> girlList() {
         log.info("girlList");
-        return girlreRepository.findAll();
+        return girlRepository.findAll();
     }
 
     /**
      * 添加女生信息
+     *
      * @param girl
      * @return girl
      */
@@ -52,7 +52,7 @@ public class GirlController {
         }
         girl.setAge(girl.getAge());
         girl.setCupSize(girl.getCupSize());
-        return ResultUtil.success(girlreRepository.save(girl));
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     /**
@@ -63,8 +63,9 @@ public class GirlController {
      */
     @GetMapping("/one")
     public Girl girlFindOne(@RequestParam("id") Integer id) {
-        return girlreRepository.findById(id).get();
+        return girlRepository.findById(id).get();
     }
+
     /**
      * 更新女生信息
      *
@@ -73,14 +74,15 @@ public class GirlController {
      * @param cupSize
      */
     @PutMapping("/update")
-    public Girl girlUpdate (@RequestParam("id") Integer id,
+    public Girl girlUpdate(@RequestParam("id") Integer id,
                            @RequestParam("age") Integer age,
-                           @RequestParam("cupSize") String cupSize){
+                           @RequestParam("age") String cupSize
+    ) {
         Girl girl = new Girl();
         girl.setId(id);
         girl.setAge(age);
         girl.setCupSize(cupSize);
-        return (girlreRepository.save(girl));
+        return (girlRepository.save(girl));
     }
 
     /**
@@ -90,7 +92,7 @@ public class GirlController {
      */
     @DeleteMapping("/delete")
     public void delete(@RequestParam("id") Integer id) {
-        girlreRepository.deleteById(id);
+        girlRepository.deleteById(id);
     }
 
     /**
@@ -101,7 +103,7 @@ public class GirlController {
      */
     @GetMapping("/age")
     public List<Girl> girlFindByAge(@RequestParam("age") Integer age) {
-        return girlreRepository.findByAge(age);
+        return girlRepository.findByAge(age);
     }
 
     @PostMapping("/addtwo")
@@ -110,7 +112,7 @@ public class GirlController {
     }
 
     @GetMapping("/getAge/{id}")
-    public void getAge(@PathVariable("id") Integer id) throws Exception{
+    public void getAge(@PathVariable("id") Integer id) throws Exception {
         girlService.getAge(id);
     }
 }

@@ -25,10 +25,10 @@ public class HelloController {
     private GirlProperties girlProperties;
 
     @GetMapping("/say")
-    public String say(@RequestParam(value = "id",required = false,defaultValue ="0") Integer id){
+    public String say(@RequestParam(value = "id", required = false, defaultValue = "0") Integer id) {
         // return cupSize+age;
         //return girlProperties.getCupSize();
 
-        return "id:"+id;
+        return "id:" + id;
     }
 }

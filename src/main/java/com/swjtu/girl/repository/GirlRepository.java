@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2019/1/20 18:37
  */
 @Component
-public interface GirlreRepository extends JpaRepository<Girl,Integer> {
+public interface GirlRepository extends JpaRepository<Girl, Integer> {
 
     /**
      * 通过年龄来查询

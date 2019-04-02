@@ -2,18 +2,25 @@ package com.swjtu.girl.dao;
 
 /**
  * http请求返回的最外层对象
+ *
  * @author 李天峒
  * @date 2019/1/23 20:47
  */
 public class Result<T> {
 
-    /** 错误码*/
+    /**
+     * 错误码
+     */
     private Integer code;
 
-    /** 提示信息*/
+    /**
+     * 提示信息
+     */
     private String msg;
 
-    /** 具体内容*/
+    /**
+     * 具体内容
+     */
     private T data;
 
     public Integer getCode() {

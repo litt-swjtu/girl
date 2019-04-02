@@ -2,7 +2,7 @@ package com.swjtu.girl.service;
 
 import com.swjtu.girl.Exception.GirlException;
 import com.swjtu.girl.enums.ResultEnum;
-import com.swjtu.girl.repository.GirlreRepository;
+import com.swjtu.girl.repository.GirlRepository;
 import com.swjtu.girl.dao.Girl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,34 +16,35 @@ import org.springframework.transaction.annotation.Transactional;
 public class GirlService {
 
     @Autowired
-    private GirlreRepository girlreRepository;
+    private GirlRepository girlRepository;
 
     @Transactional(rollbackFor = Exception.class)
-    public void addTwo(){
+    public void addTwo() {
         Girl girlA = new Girl();
         girlA.setCupSize("A");
         girlA.setAge(18);
-        girlreRepository.save(girlA);
+        girlRepository.save(girlA);
 
         Girl girlB = new Girl();
         girlB.setCupSize("FF");
         girlB.setAge(22);
-        girlreRepository.save(girlB);
+        girlRepository.save(girlB);
     }
 
     /**
      * 获取年龄
+     *
      * @param id
      * @throws Exception
      */
-    public void getAge(Integer id) throws Exception{
-        Integer a= 12, b=16;
-        Girl girl = girlreRepository.findById(id).get();
+    public void getAge(Integer id) throws Exception {
+        Integer a = 12, b = 16;
+        Girl girl = girlRepository.findById(id).get();
         Integer age = girl.getAge();
-        if(age <= a){
+        if (age <= a) {
             //你还在上小学吧 code=100
             throw new GirlException(ResultEnum.PRIMARY_SCHOOL);
-        }else if(age>a && age<b){
+        } else if (age > a && age < b) {
             //你可能在上初中 code =101
             throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
         }
@@ -51,11 +52,12 @@ public class GirlService {
 
     /**
      * 查询一条女生信息
+     *
      * @param id
      * @return
      */
-    public Girl findOne(Integer id){
-        Girl girl = girlreRepository.findById(id).get();
+    public Girl findOne(Integer id) {
+        Girl girl = girlRepository.findById(id).get();
         return girl;
     }
 }
